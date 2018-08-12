@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 //
 app.use("/poll", poll);
-const port = 4000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
 	console.log("connected to server @ 4000");
 });
