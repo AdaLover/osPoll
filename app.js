@@ -20,5 +20,5 @@ app.use(cors());
 app.use("/poll", poll);
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-	console.log("connected to server @ 4000");
+	console.log("connected to server ");
 });

@@ -1,16 +1,17 @@
 const form = document.getElementById("voteForm");
-
+let host = window.location.href + "poll";
+console.log(host);
 form.addEventListener("submit", e => {
 	const choice = document.querySelector("input[name=os]:checked").value;
 	const data = { os: choice };
 
-	fetch("http://localhost:4000/poll", {
+	fetch(host, {
 		method: "post",
 		body: JSON.stringify(data),
 		headers: new Headers({ "Content-type": "application/json" })
 	})
 		.then(res => res.json())
-		.then(data => console.log(data))
+		.then(data)
 		.catch(err => console.log(err));
 
 	e.preventDefault();
@@ -26,7 +27,7 @@ let dataPoints = [
 ];
 arrLoc = { Windows: 0, MacOS: 1, Linux: 2, Android: 3, Other: 4 };
 //get request
-fetch("http://localhost:4000/poll", {
+fetch(host, {
 	method: "get",
 	headers: new Headers({ "Content-type": "application/json" })
 })
@@ -68,9 +69,7 @@ fetch("http://localhost:4000/poll", {
 			var channel = pusher.subscribe("osPoll");
 			channel.bind("osVote", function(data) {
 				dataPoints = dataPoints.map(x => {
-					//console.log(data.os);
 					if (x.label === data.os) {
-						console.log(x.label);
 						x.y += data.points;
 					}
 					return x;
