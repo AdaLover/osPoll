@@ -36,6 +36,7 @@ fetch(host, {
 		let votesArr = data.votes;
 		for (vote of votesArr) {
 			let os = vote.os;
+			os.replace(" ","");
 			dataPoints[arrLoc[os]].y += 1;
 		}
 		//Chartjs Implementation
